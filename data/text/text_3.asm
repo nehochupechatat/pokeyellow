@@ -115,9 +115,8 @@ _PartyMenuSwapMonText::
 _PotionText::
 	text_ram wNameBuffer
 	text_start
-	line "recovered by @"
-	text_decimal wHPBarHPDifference, 2, 3
-	text "!"
+	line "restored some"
+	text "health!"
 	done
 
 _AntidoteText::
@@ -165,9 +164,8 @@ _ReviveText::
 _RareCandyText::
 	text_ram wNameBuffer
 	text " grew"
-	line "to level @"
-	text_decimal wCurEnemyLevel, 1, 3
-	text "!@"
+	line "a bit stronger!@"
+
 	text_end
 
 _TurnedOnPC1Text::

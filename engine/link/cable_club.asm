@@ -631,7 +631,7 @@ TradeCenter_DisplayStats:
 	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
 	predef StatusScreen
-	predef StatusScreen2
+	;predef StatusScreen2
 	call Delay3
 	ld b, SET_PAL_OVERWORLD
 	call RunPaletteCommand

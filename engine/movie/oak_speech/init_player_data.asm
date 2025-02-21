@@ -12,10 +12,10 @@ InitPlayerData2:
 	ld a, $ff
 	ld [wUnusedPlayerDataByte], a
 
-	ld a, 90 ; initialize happiness to 90
+	xor a ; initialize happiness to 0
 	ld [wPikachuHappiness], a
-	ld a, $80
-	ld [wPikachuMood], a ; initialize mood
+	;ld a, $80
+	ld [wPikachuMood], a ; initialize mood, value 0
 
 	ld hl, wPartyCount
 	call InitializeEmptyList

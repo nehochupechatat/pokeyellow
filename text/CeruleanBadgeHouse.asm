@@ -34,15 +34,9 @@ _CeruleanBadgeHouseBoulderBadgeText::
 	prompt
 
 _CeruleanBadgeHouseCascadeBadgeText::
-	text "#MON up to L30"
-	line "will obey you."
-
-	para "Any higher, they"
-	line "become unruly!"
-
-	para "It also lets you"
-	line "use CUT outside"
-	cont "of battle."
+	para "It lets you use"
+	line "CUT outside of"
+	cont "battle!"
 	prompt
 
 _CeruleanBadgeHouseThunderBadgeText::
@@ -56,13 +50,7 @@ _CeruleanBadgeHouseThunderBadgeText::
 	prompt
 
 _CeruleanBadgeHouseRainbowBadgeText::
-	text "#MON up to L50"
-	line "will obey you."
-
-	para "Any higher, they"
-	line "become unruly!"
-
-	para "It also lets you"
-	line "use STRENGTH out-"
-	cont "side of battle."
+	para "It lets you use"
+	line "STRENGTH outside"
+	cont "of battle!"
 	prompt

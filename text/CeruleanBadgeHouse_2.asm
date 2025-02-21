@@ -9,11 +9,10 @@ _CeruleanBadgeHouseSoulBadgeText::
 	prompt
 
 _CeruleanBadgeHouseMarshBadgeText::
-	text "#MON up to L70"
-	line "will obey you."
-
-	para "Any higher, they"
-	line "become unruly!"
+	text "It doesn't do"
+	line "much, but it's"
+	para "necessary to get"
+	line "to the LEAGUE!"
 	prompt
 
 _CeruleanBadgeHouseVolcanoBadgeText::
@@ -23,6 +22,7 @@ _CeruleanBadgeHouseVolcanoBadgeText::
 	prompt
 
 _CeruleanBadgeHouseEarthBadgeText::
-	text "All #MON will"
-	line "obey you!"
+	text "The last BADGE"
+	line "necessary to get"
+	cont "to the LEAGUE!"
 	prompt

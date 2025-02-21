@@ -106,7 +106,7 @@ RedrawPartyMenu_::
 .printLevel
 	ld bc, 10 ; move 10 columns to the right
 	add hl, bc
-	call PrintLevel
+	;call PrintLevel
 	pop hl
 	pop de
 	inc de

@@ -146,8 +146,8 @@ GainExperience:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, GainedText
-	call PrintText
+	;ld hl, GainedText
+	;call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
@@ -246,14 +246,13 @@ GainExperience:
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	callabd_ModifyPikachuHappiness PIKAHAPPY_LEVELUP
-	ld hl, GrewLevelText
-	call PrintText
+	;ld hl, GrewLevelText
+	;call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
 	ld d, $1
-	callfar PrintStatsBox
-	call WaitForTextScrollButtonPress
+	;callfar PrintStatsBox
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a

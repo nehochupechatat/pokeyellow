@@ -1529,8 +1529,8 @@ ItemUseMedicine:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	ld d, $01
-	callfar PrintStatsBox ; display new stats text box
-	call WaitForTextScrollButtonPress ; wait for button press
+	;callfar PrintStatsBox ; display new stats text box
+	;call WaitForTextScrollButtonPress ; wait for button press
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	predef LearnMoveFromLevelUp ; learn level up move, if any

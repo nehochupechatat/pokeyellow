@@ -1912,9 +1912,6 @@ DrawPlayerHUDAndHPBar:
 	ld de, wLoadedMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
-	jr nz, .doNotPrintLevel
-	call PrintLevel
-.doNotPrintLevel
 	ld a, [wLoadedMonSpecies]
 	ld [wCurPartySpecies], a
 	hlcoord 10, 9
@@ -1963,11 +1960,6 @@ DrawEnemyHUDAndHPBar:
 	ld de, wEnemyMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
-	jr nz, .skipPrintLevel ; if the mon has a status condition, skip printing the level
-	ld a, [wEnemyMonLevel]
-	ld [wLoadedMonLevel], a
-	call PrintLevel
-.skipPrintLevel
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ldh [hMultiplicand + 1], a
@@ -2471,7 +2463,7 @@ PartyMenuOrRockOrRun:
 	call ClearSprites
 ; display the two status screens
 	predef StatusScreen
-	predef StatusScreen2
+	;predef StatusScreen2
 ; now we need to reload the enemy mon pic
 	ld a, 1
 	ldh [hWhoseTurn], a
@@ -4126,6 +4118,68 @@ OHKOText:
 ; checks if a traded mon will disobey due to lack of badges
 ; stores whether the mon will use a move in Z flag
 CheckForDisobedience:
+; new: Starter Pikachu is treated differently
+	callfar IsThisPartymonStarterPikachu ; edited, was the _Party version, but gave weird bugs with disobedience with STRUGGLE-ing mons
+	jr nc, .notStarterPikachu
+; check for Pikachu happiness, using same thresholds as for the overworld emotions (see engine/pikachu/pikachu_pic_animation.asm)
+; 50 - 100 - 130 - 160 - 200 - 250 - 255
+	call BattleRandom
+	ld b, a ; now b holds a random number
+	ld a, [wPikachuHappiness]
+	cp 131
+	jp nc, .canUseMove
+	cp 101
+	jr nc, .pikachu10PercentDisobey
+	cp 51
+	jr nc, .pikachu20PercentDisobey
+	; 30% range
+	ld a, b
+	cp 30 percent
+	jp nc, .canUseMove
+	jr .pikachuDisobeyed
+.pikachu20PercentDisobey
+	ld a, b
+	cp 20 percent
+	jp nc, .canUseMove
+	jr .pikachuDisobeyed
+.pikachu10PercentDisobey
+	ld a, b
+	cp 10 percent
+	jp nc, .canUseMove
+.pikachuDisobeyed
+; now the probabilities of doing one of the three bad things depend on the mood
+	call BattleRandom
+	ld b, a ; now b holds a random number (maybe do push-pop?)
+	ld a, [wPikachuMood]
+	cp $80
+	ld a, b ; now a holds again (maybe do push-pop?)
+	jr z, .neutralMood
+	jr c, .badMood
+;.goodMood
+	cp 60
+	jp c, .useRandomMove
+	cp 80
+	jp c, .monDoesNothing
+	cp 15
+	jp c, .monHitItself
+	jp .monNaps
+.neutralMood
+	cp 30
+	jp c, .useRandomMove
+	cp 70
+	jp c, .monDoesNothing
+	cp 90
+	jp c, .monHitItself
+	jp .monNaps
+.badMood
+	cp 10
+	jp c, .useRandomMove
+	cp 30
+	jp c, .monDoesNothing
+	cp 60
+	jp c, .monHitItself
+	jp .monNaps
+.notStarterPikachu
 	xor a
 	ld [wMonIsDisobedient], a
 	ld a, [wLinkState]
@@ -4199,6 +4253,11 @@ CheckForDisobedience:
 	jr c, .monNaps
 	cp b
 	jr nc, .monDoesNothing
+	ld hl, WontObeyText
+	call PrintText
+	call HandleSelfConfusionDamage
+	jp .cannotUseMove
+.monHitItself
 	ld hl, WontObeyText
 	call PrintText
 	call HandleSelfConfusionDamage

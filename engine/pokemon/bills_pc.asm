@@ -479,7 +479,7 @@ DisplayDepositWithdrawMenu:
 .next2
 	ld [wMonDataLocation], a
 	predef StatusScreen
-	predef StatusScreen2
+	;predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
 	call RunDefaultPaletteCommand
