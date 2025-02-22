@@ -26,8 +26,8 @@ Printer_GetMonStats:
 	lb bc, 4, 18
 	call TextBoxBorder
 
-	hlcoord 3, 10
-	call PrintLevelFull
+	;hlcoord 3, 10
+	;call PrintLevelFull
 
 	hlcoord 2, 10
 	ld a, $6e

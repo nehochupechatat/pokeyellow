@@ -455,7 +455,7 @@ PrintListMenuEntries::
 	pop hl
 	ld bc, $1c
 	add hl, bc
-	call PrintLevel
+	;call PrintLevel
 	pop af
 	ld [wNamedObjectIndex], a
 .skipPrintingPokemonLevel
